@@ -1,0 +1,9 @@
+{
+  "welcome": {
+    "title": "مرحباً بك في  {{framework}}"
+  },
+
+  "upBar": {
+    "groupsCreateNew": "إنشاء مجموعة جديدة"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "sidebar": {
+    "dashboard": "لوحة عدادات",
+    "groups": "مجموعات",
+    "moderators": "المشرفون",
+    "participants": "المشاركين"
+  },
+  "createNewGroupeForm": {
+    "groupeTitle": {
+      "label": "إسم المجموعة ",
+      "errorMessage": "إسم المجموعة  مطلوب !"
+    },
+    "groupeDescription": {
+      "label": "وصف المجموعة",
+      "errorMessage": "وصف المجموعة مطلوب !"
+    },
+    "submitButton": "إنشاء"
+  },
+  "loginForm": {
+    "label": "دخول",
+    "username": {
+      "rule": "يرجى إدخال اسم المستخدم الخاص بك!",
+      "label": "اسم المستخدم"
+    },
+    "password": {
+      "ruleMessage": "يرجى إدخال كلمة المرور الخاصة بك!",
+      "label": "كلمة السر "
+    },
+
+    "submit": "إرسال"
+  }
+}

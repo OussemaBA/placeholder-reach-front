@@ -1,0 +1,34 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "groups": "Groups",
+    "moderators": "Moderators",
+    "participants": "Participants"
+  },
+  "createNewGroupeForm": {
+    "groupeTitle": {
+      "label": "Groupe title",
+      "errorMessage": "Groupe Title is required !"
+    },
+    "groupeDescription": {
+      "label": "Groupe description",
+      "errorMessage": "Groupe Description is required !"
+    },
+    "submitButton": "Create"
+  },
+  "loginForm": {
+    "label": "Login",
+    "username": {
+      "rule": "Please input your Username!",
+      "label": "Username"
+    },
+    "password": {
+      "ruleMessage": "Please input your password!",
+      "label": "password"
+    },
+    "rememberMe": {
+      "label": "remember me "
+    },
+    "submit": "Submit"
+  }
+}
