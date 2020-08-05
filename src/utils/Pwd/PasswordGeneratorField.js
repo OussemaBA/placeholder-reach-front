@@ -62,9 +62,10 @@ export default function ModeratorPasswordGeneratorField(props) {
                 generatePwd();
               }}
               readOnly
+              variant="contained"
               size="small"
               color="secondary">
-              Generate
+              generate
             </Button>
           </InputAdornment>
         }

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
-import ModeratorPasswordGeneratorField from '../../../../utils/ModeratorPwd/PasswordGeneratorField';
+import ModeratorPasswordGeneratorField from '../../../../utils/Pwd/PasswordGeneratorField';
 import ModeratorGroupsField from './ModeratorGroupsField';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';

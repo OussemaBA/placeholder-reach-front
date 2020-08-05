@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import CloseIcon from '@material-ui/icons/Close';
-
 import { makeStyles } from '@material-ui/styles';
 import {
   Button,
@@ -13,9 +11,10 @@ import {
   DialogTitle,
   Slide
 } from '@material-ui/core';
-
-import { SearchInput } from 'components';
+import { fetchParticipants } from '../../../../actions';
+import { connect } from 'react-redux';
 import ParticipantNewForm from '../../../Participants/ParticipantNewForm';
+
 const useStyles = makeStyles(theme => ({
   root: {},
   row: {
@@ -35,14 +34,15 @@ const useStyles = makeStyles(theme => ({
   },
   searchInput: {
     marginRight: theme.spacing(1)
-  }
+  },
+  Dialog: { marginBottom: '50px' }
 }));
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const UsersToolbar = props => {
-  const { className, ...rest } = props;
+const ParticipantsToolbar = props => {
+  const { className, fetchParticipants, participants, ...rest } = props;
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -68,35 +68,29 @@ const UsersToolbar = props => {
           {props.whatToAdd}
         </Button>
       </div>
-      <div>
-        <Dialog
-          onClose={ModelHandleClickClose}
-          open={open}
-          TransitionComponent={Transition}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description">
-          <DialogContent>
-            <ParticipantNewForm />
-          </DialogContent>
-          {/* <DialogActions>
-            <Button onClick={ModelHandleClickClose} color="primary" autoFocus>
-              Create
-            </Button>
-          </DialogActions> */}
-        </Dialog>
-      </div>
-      <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search user"
-        />
-      </div>
+      <Dialog
+        onClose={ModelHandleClickClose}
+        open={open}
+        className={classes.Dialog}
+        TransitionComponent={Transition}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogContent>
+          <ParticipantNewForm CloseModal={ModelHandleClickClose} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
-UsersToolbar.propTypes = {
+ParticipantsToolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default UsersToolbar;
+const mapStateToProps = ({ participants }) => ({
+  participants
+});
+
+export default connect(mapStateToProps, { fetchParticipants })(
+  ParticipantsToolbar
+);

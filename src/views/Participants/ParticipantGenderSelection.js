@@ -27,7 +27,7 @@ export default function SimpleSelect(props) {
       <Select value={Gender} onChange={handleChange} label="Gender">
         <MenuItem value={'Male'}>Male</MenuItem>
         <MenuItem value={'Female'}>Female</MenuItem>
-        <MenuItem value={'Unknown'}> Rather not say</MenuItem>
+        <MenuItem value={'Rather not say'}> Rather not say</MenuItem>
       </Select>
     </FormControl>
   );

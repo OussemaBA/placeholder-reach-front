@@ -19,8 +19,6 @@ import {
   TablePagination
 } from '@material-ui/core';
 
-import { getInitials } from 'helpers';
-
 const useStyles = makeStyles(theme => ({
   root: {},
   content: {
@@ -38,10 +36,13 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     justifyContent: 'flex-end'
+  },
+  TableCell: {
+    whiteSpace: 'nowrap'
   }
 }));
 
-const UsersTable = props => {
+const ParticipantsTable = props => {
   const { className, users, ...rest } = props;
 
   const classes = useStyles();
@@ -94,7 +95,6 @@ const UsersTable = props => {
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      {console.log('users', users)}
       <CardContent className={classes.content}>
         <PerfectScrollbar>
           <div className={classes.inner}>
@@ -112,13 +112,20 @@ const UsersTable = props => {
                       onChange={handleSelectAll}
                     />
                   </TableCell>
-                  <TableCell>username</TableCell>
-                  <TableCell>Login(ID)</TableCell>
-                  <TableCell>Contact number</TableCell>
-                  <TableCell>Place of living</TableCell>
-                  <TableCell>Date of birth</TableCell>
-                  <TableCell>Gender</TableCell>
-                  <TableCell>Password</TableCell>
+                  <TableCell className={classes.TableCell}>username</TableCell>
+                  <TableCell className={classes.TableCell}>Login(ID)</TableCell>
+                  <TableCell className={classes.TableCell}>
+                    Contact number
+                  </TableCell>
+                  <TableCell className={classes.TableCell}>
+                    Place of living
+                  </TableCell>
+
+                  <TableCell className={classes.TableCell}>
+                    Date of birth
+                  </TableCell>
+                  <TableCell className={classes.TableCell}>Gender</TableCell>
+                  <TableCell className={classes.TableCell}>Password</TableCell>
 
                   <TableCell>Joined at </TableCell>
                 </TableRow>
@@ -128,7 +135,7 @@ const UsersTable = props => {
                   <TableRow
                     className={classes.tableRow}
                     hover
-                    key={user.id}
+                    key={user._id}
                     selected={selectedUsers.indexOf(user.id) !== -1}>
                     <TableCell padding="checkbox">
                       <Checkbox
@@ -171,16 +178,16 @@ const UsersTable = props => {
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}
           rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 50]}
         />
       </CardActions>
     </Card>
   );
 };
 
-UsersTable.propTypes = {
+ParticipantsTable.propTypes = {
   className: PropTypes.string,
   users: PropTypes.array.isRequired
 };
 
-export default UsersTable;
+export default ParticipantsTable;

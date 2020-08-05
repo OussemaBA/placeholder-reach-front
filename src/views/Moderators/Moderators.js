@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { UsersToolbar, UsersTable } from '../UserList/components';
-import mockData from '../UserList/data';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 const UserList = () => {
   const classes = useStyles();
 
-  const [users] = useState(mockData);
+  const [users] = useState('mockData');
 
   return (
     <div className={classes.root}>

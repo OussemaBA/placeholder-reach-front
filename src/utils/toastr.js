@@ -1,48 +1,66 @@
-import toastr from 'toastr';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import React from 'react';
+import { Typography, makeStyles } from '@material-ui/core';
 
 // base options for toastr
+
 const options = {
-  closeButton: true,
-  debug: false,
-  newestOnTop: false,
-  progressBar: false,
-  positionClass: 'toast-top-right',
-  preventDuplicates: true,
-  onclick: null,
-  showDuration: '300',
-  hideDuration: '1000',
-  timeOut: '5000',
-  extendedTimeOut: '1000',
-  showEasing: 'swing',
-  hideEasing: 'linear',
-  showMethod: 'fadeIn',
-  hideMethod: 'fadeOut'
+  position: 'bottom-center',
+  autoClose: 4000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined
 };
 
-// toastr for error, warning, info, success
-export function handleErrorToastr(error) {
-  toastr.options = options;
-  toastr.error(error, 'Error');
+const toastrMessageStyling = {
+  color: 'white',
+  whiteSpace: 'nowrap',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
+
+const formatedMessage = message => {
+  return (
+    <>
+      <Typography
+        variant="subtitle1"
+        component="h1"
+        style={toastrMessageStyling}>
+        {message}
+      </Typography>
+    </>
+  );
+};
+
+export function handleInfoToastr(message, whenToastrIsClosed) {
+  toast.success(formatedMessage(message), {
+    ...options,
+    onClose: () => whenToastrIsClosed()
+  });
 }
 
-export function handleWarningToastr(message) {
-  toastr.options = options;
-  toastr.warning(message, 'Warning');
+// // toastr for error, warning, info, success
+export function handleErrorToastr(message, whenToastrIsClosed) {
+  toast.error(message, {
+    ...options,
+    onClose: () => whenToastrIsClosed()
+  });
 }
+// export function handleWarningToastr(message) {
+//   toastr.warning(message, 'Warning');
+// }
 
-export function handleInfoToastr(message) {
-  toastr.options = options;
-  toastr.info(message, 'Info');
-}
+// export function handleSuccessToastr(message) {
+//   toastr.success(message, 'Success');
+// }
 
-export function handleSuccessToastr(message) {
-  toastr.options = options;
-  toastr.success(message, 'Success');
-}
-
-export function clearToastr() {
-  toastr.clear();
-}
+// export function clearToastr() {
+//   toastr.clear();
+// }
 
 // sort function
 export const compareSort = key => {

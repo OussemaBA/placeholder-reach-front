@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import { ToastContainer } from 'react-toastify';
 
 /** Redux */
 import store from './middleware/Store';
@@ -35,6 +36,8 @@ ReactDOM.render(
   <Provider store={store}>
     <I18nextProvider i18n={i18next}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ToastContainer />
+
         <App />
       </MuiPickersUtilsProvider>
     </I18nextProvider>

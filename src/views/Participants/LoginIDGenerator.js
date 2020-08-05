@@ -63,9 +63,10 @@ const LoginIDGenerator = props => {
                 generatePwd();
               }}
               readOnly
+              variant="contained"
               size="small"
               color="primary">
-              Generate new Login ID
+              new ID
             </Button>
           </InputAdornment>
         }

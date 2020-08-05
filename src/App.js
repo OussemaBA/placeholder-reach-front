@@ -24,6 +24,8 @@ import withCookies from './HOC/withCookies';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'recompose';
 import { changeLanguage, changeDirection } from './actions';
+import 'fontsource-roboto';
+
 const browserHistory = createBrowserHistory();
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
