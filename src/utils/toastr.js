@@ -36,7 +36,7 @@ const formatedMessage = message => {
   );
 };
 
-export function handleInfoToastr(message, whenToastrIsClosed) {
+export function handleSuccessToastr(message, whenToastrIsClosed) {
   toast.success(formatedMessage(message), {
     ...options,
     onClose: () => whenToastrIsClosed()

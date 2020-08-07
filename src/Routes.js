@@ -8,13 +8,11 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import {
   Dashboard as DashboardView,
   GroupList as GroupListView,
-  UserList as UserListView,
-  Typography as TypographyView,
+  ParticipantsList as ParticipantsListView,
   Icons as IconsView,
-  Account as AccountView,
+  ModeratorsList as ModeratorsListView,
   Settings as SettingsView,
   SignUp as SignUpView,
-  SignIn as SignInView,
   NotFound as NotFoundView
 } from './views';
 import { routes } from './config/constants';
@@ -30,10 +28,10 @@ const Routes = () => {
         path={routes.DASHBOARD}
       />
       <PublicRoute
-        component={UserListView}
+        component={ParticipantsListView}
         exact
         layout={MainLayout}
-        path={routes.USERS}
+        path={routes.PARTICIPANTS}
       />
       <PublicRoute
         component={GroupListView}
@@ -41,12 +39,7 @@ const Routes = () => {
         layout={MainLayout}
         path={routes.GROUPS}
       />
-      <PrivateRouteWithLayout
-        component={TypographyView}
-        exact
-        layout={MainLayout}
-        path="/typography"
-      />
+
       <PrivateRouteWithLayout
         component={IconsView}
         exact
@@ -54,10 +47,10 @@ const Routes = () => {
         path="/icons"
       />
       <PublicRoute
-        component={AccountView}
+        component={ModeratorsListView}
         exact
         layout={MainLayout}
-        path="/account"
+        path={routes.MODERATORS}
       />
       <PrivateRouteWithLayout
         component={SettingsView}
@@ -71,12 +64,7 @@ const Routes = () => {
         layout={MinimalLayout}
         path="/sign-up"
       />
-      <PublicRoute
-        component={SignInView}
-        exact
-        layout={MinimalLayout}
-        path={routes.LOGIN}
-      />
+
       <PublicRoute
         component={NotFoundView}
         exact

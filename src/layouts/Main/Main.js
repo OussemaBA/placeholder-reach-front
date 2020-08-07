@@ -89,10 +89,7 @@ const mapStateToProps = state => ({
 
 export default compose(
   withCookies,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
 
   withTranslation('common')
 )(Main);

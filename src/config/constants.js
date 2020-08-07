@@ -18,7 +18,8 @@ export const routes = {
   LOGIN: '/sign-in',
   DASHBOARD: '/dashboard',
   GROUPS: '/Groups',
-  USERS: '/users',
+  PARTICIPANTS: '/participants',
+  MODERATORS: '/Moderators',
   APPLICATION_ERROR: '/applicationError',
   NO_MATCH: '/not-found'
 };

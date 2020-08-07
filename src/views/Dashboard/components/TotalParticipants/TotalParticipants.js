@@ -55,7 +55,6 @@ const TotalParticipants = props => {
   };
 
   useEffect(() => {
-    console.log('participants', participants);
     fetchParticipants();
     setParticipantsNumber(participants.participants.length);
   }, [participants.participants.length]);

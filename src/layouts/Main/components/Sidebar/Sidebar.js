@@ -15,6 +15,7 @@ import { compose } from 'recompose';
 import { withTranslation } from 'react-i18next';
 import { changeLanguage } from '../../../../actions';
 import { Profile, SidebarNav, UpgradePlan } from './components';
+import { routes } from '../../../../config/constants';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -51,23 +52,23 @@ const Sidebar = props => {
   const pages = [
     {
       title: t('sidebar.dashboard'),
-      href: '/dashboard',
+      href: routes.DASHBOARD,
       icon: <DashboardIcon />
     },
 
     {
       title: t('sidebar.groups'),
-      href: '/Groups',
+      href: routes.GROUPS,
       icon: <ShoppingBasketIcon />
     },
     {
       title: t('sidebar.participants'),
-      href: '/users',
+      href: routes.PARTICIPANTS,
       icon: <PeopleIcon />
     },
     {
       title: t('sidebar.moderators'),
-      href: '/account',
+      href: routes.MODERATORS,
       icon: <AccountBoxIcon />
     }
     // {

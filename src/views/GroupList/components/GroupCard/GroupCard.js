@@ -66,7 +66,7 @@ const GroupCard = props => {
           {Group.desc}
         </Typography>
       </CardContent>
-      <Divider />
+      <Divider/>
       <CardActions>
         <Grid container justify="space-between">
           <Grid className={classes.statsItem} item>

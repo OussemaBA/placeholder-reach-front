@@ -91,12 +91,6 @@ const GroupsToolbar = props => {
           </Dialog>
         </div>
       </div>
-      <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search for a Group"
-        />
-      </div>
     </div>
   );
 };
