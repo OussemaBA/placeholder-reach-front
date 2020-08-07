@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import SearchInput from '../../utils/Search/SearchInput';
+import SearchBar from '../../utils/Search/SearchBars';
 import { GroupsToolbar, GroupCard } from './components';
 
 import { fetchGroups } from '../../actions';
@@ -24,30 +24,42 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const fields = [
+  { key: 'name', value: 'Group name' },
+  { key: 'desc', value: 'Group Description' }
+];
+
 const GroupList = props => {
   const classes = useStyles();
   const { groups, fetchGroups } = props;
 
-  const [Groups, setGroups] = useState(groups.groups);
+  const [GroupsList, setGroupsList] = useState(groups.groups);
+
+  const handleSearchData = data => {
+    setGroupsList(data);
+  };
 
   useEffect(() => {
     fetchGroups();
   }, []);
 
   useEffect(() => {
-    setGroups(groups.groups);
+    setGroupsList(groups.groups);
   }, [groups.groups]);
 
   return (
     <div className={classes.root}>
       <GroupsToolbar />
-      {/* <SearchInput
-        className={classes.searchInput}
-        placeholder="Search for a Group"
-      /> */}
+      <SearchBar
+        whatTosearchFor={'Search for a Moderators'}
+        fields={fields}
+        data={groups.groups}
+        onSearchForData={handleSearchData}
+      />
+
       <div className={classes.content}>
         <Grid item>
-          {Groups.map(group => (
+          {GroupsList.map(group => (
             <Grid item key={group._id} lg={6} sm={12} md={6} xl={12} xs={12}>
               <GroupCard Group={group} />
             </Grid>

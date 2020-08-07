@@ -9,7 +9,7 @@ import { makeStyles, Box, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
 import ModeratorPasswordGeneratorField from '../../../utils/Pwd/PasswordGeneratorField';
-import { snackbarErrorHandler } from '../../../utils/snackbars';
+import { snackbarErrorHandler } from '../../../utils/snackbar';
 import ModeratorGroupsSelector from '../../../utils/GroupsSelector';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';

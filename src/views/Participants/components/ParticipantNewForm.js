@@ -14,7 +14,7 @@ import LoginIDGenerator from './LoginIDGenerator';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { handleSuccessToastr, handleErrorToastr } from '../../../utils/toastr';
-import { snackbarErrorHandler } from '../../../utils/snackbars';
+import { snackbarErrorHandler } from '../../../utils/snackbar';
 import { Api } from '../../../config/constants';
 import axios from 'axios';
 
