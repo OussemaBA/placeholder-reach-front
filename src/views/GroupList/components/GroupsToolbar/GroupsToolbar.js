@@ -6,14 +6,8 @@ import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import { SearchInput } from 'components';
-import GroupsCreateNewForm from '../GroupsCreateNewForm';
+import GroupsCreateNewForm from '../GroupNewForm';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -76,18 +70,7 @@ const GroupsToolbar = props => {
             onClose={ModelHandleClickClose}
             open={open}
             TransitionComponent={Transition}>
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  edge="start"
-                  onClick={ModelHandleClickClose}>
-                  <CloseIcon />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <GroupsCreateNewForm />
+            <GroupsCreateNewForm CloseModal={ModelHandleClickClose} />
           </Dialog>
         </div>
       </div>

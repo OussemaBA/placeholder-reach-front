@@ -1,5 +1,5 @@
 /** list déroulante  */
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -80,15 +80,17 @@ export default function DataList(props) {
     setRight([]);
   };
 
+  useEffect(() => {
+    props.OnChoosedData(right);
+  }, [right]);
+
   const customList = items => (
     <Paper elevation={3} variant="outlined" className={classes.paper}>
       <List dense component="div" role="list">
         {items.map(value => {
-          const labelId = `transfer-list-item-${value}-label`;
-
           return (
             <ListItem
-              key={value}
+              key={value._id}
               role="listitem"
               button
               onClick={handleToggle(value)}>
@@ -97,29 +99,16 @@ export default function DataList(props) {
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
+                  inputProps={{ 'aria-labelledby': value._id }}
                 />
               </ListItemIcon>
               <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar
+                  alt={value.username}
+                  src="/static/images/avatar/1.jpg"
+                />
               </ListItemAvatar>
-              <ListItemText
-                primary="Brunch this weekend?"
-                secondary={
-                  ''
-
-                  // <React.Fragment>
-                  //   <Typography
-                  //     component="span"
-                  //     variant="body2"
-                  //     className={classes.inline}
-                  //     color="textPrimary">
-                  //     Ali Connors
-                  //   </Typography>
-                  //   {" — I'll be in your neighborhood doing errands this…"}
-                  // </React.Fragment>
-                }
-              />
+              <ListItemText primary={value.username} secondary={value.email} />
               <Divider variant="inset" component="li" />
             </ListItem>
           );

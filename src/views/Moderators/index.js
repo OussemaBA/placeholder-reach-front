@@ -1,1 +1,1 @@
-export { default } from './ModeratorsList';
+export { default } from './ModeratorsTable';
