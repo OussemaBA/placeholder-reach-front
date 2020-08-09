@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
+import { Step, Box, Grid } from '@material-ui/core';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import ModeratorsDataList from './ModeratorsTransferList';
@@ -89,7 +88,7 @@ export default function Checkout(props) {
       console.log('dataTosubmit:', dataTosubmit);
       await axios.post(`${Api.baseURL}/addGroup`, dataTosubmit);
     } catch (error) {
-      if (error.message == 'Network Error') {
+      if (error.message === 'Network Error') {
         handleErrorToastr(error.message, () => props.CloseModal());
       }
       return Error();
@@ -165,25 +164,29 @@ export default function Checkout(props) {
               </Step>
             ))}
           </Stepper>
-          <React.Fragment>
-            {getStepContent(activeStep)}
-            <div className={classes.buttons}>
-              {activeStep !== 0 && (
-                <Button onClick={handleBack} className={classes.button}>
-                  Back
+          {getStepContent(activeStep)}
+          <Grid spacing={2}>
+            <Box display="flex" justifyContent="center" m={1} p={1}>
+              <Box p={1}>
+                {activeStep !== 0 && <Button onClick={handleBack}>Back</Button>}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={isDisabled}
+                  onClick={handleNext}>
+                  {activeStep === steps.length - 1
+                    ? 'Create a new group'
+                    : 'Next'}
+                  {}
                 </Button>
-              )}
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={isDisabled}
-                onClick={handleNext}
-                className={classes.button}>
-                {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                {}
-              </Button>
-            </div>
-          </React.Fragment>
+              </Box>
+              <Box p={1}>
+                <Button fullWidth color="secondary" onClick={props.CloseModal}>
+                  Close
+                </Button>
+              </Box>
+            </Box>
+          </Grid>
         </Paper>
       </main>
     </React.Fragment>

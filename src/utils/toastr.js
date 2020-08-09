@@ -6,7 +6,7 @@ import { Typography, makeStyles } from '@material-ui/core';
 // base options for toastr
 
 const options = {
-  position: 'bottom-center',
+  position: 'bottom-right',
   autoClose: 4000,
   hideProgressBar: false,
   closeOnClick: true,

@@ -14,12 +14,14 @@ import {
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Link as RouterLink } from 'react-router-dom';
+import ReadMoreReact from 'read-more-react';
 
 const useStyles = makeStyles(theme => ({
-  root: { margin: '4%' },
+  root: { margin: '2%', width: 300, height: 120 },
   imageContainer: {
     height: 64,
     width: 64,
+
     margin: '0 auto',
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: '5px',
@@ -47,10 +49,11 @@ const GroupCard = props => {
 
   const classes = useStyles();
 
+  const maxLength = 80;
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
+    <Card {...rest} className={classes.root}>
       <CardContent>
-        <div className={classes.imageContainer}>
+        {/* <div className={classes.imageContainer}>
           <Avatar
             alt={Group.name}
             className={classes.avatar}
@@ -58,15 +61,15 @@ const GroupCard = props => {
             src={Group.avatar}
             to="/settings"
           />
-        </div>
-        <Typography align="center" gutterBottom variant="h4">
+        </div> */}
+        <Typography align="center" gutterBottom variant="h6">
           {Group.name}
         </Typography>
         <Typography align="center" variant="body1">
-          {Group.desc}
+          {Group.desc.slice(0, 30) + '...'}
         </Typography>
       </CardContent>
-      <Divider/>
+      <Divider />
       <CardActions>
         <Grid container justify="space-between">
           <Grid className={classes.statsItem} item>

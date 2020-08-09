@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3)
+    padding: theme.spacing(2)
   },
   content: {
     marginTop: theme.spacing(2)
@@ -57,15 +57,12 @@ const GroupList = props => {
         onSearchForData={handleSearchData}
       />
 
-      <div className={classes.content}>
-        <Grid item>
-          {GroupsList.map(group => (
-            <Grid item key={group._id} lg={6} sm={12} md={6} xl={12} xs={12}>
-              <GroupCard Group={group} />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+      <Grid container className={classes.cardList}>
+        {GroupsList.map(group => (
+          <GroupCard Group={group} />
+        ))}
+      </Grid>
+
       <div className={classes.pagination}>
         <Typography variant="caption">1-6 of 20</Typography>
         <IconButton>

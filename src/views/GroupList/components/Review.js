@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
   grpName: {
     marginBottom: theme.spacing(2)
-  }
+  },
+  Accordion: { maxWidth: '300px' }
 }));
 
 export default function Review(props) {
@@ -71,6 +72,7 @@ export default function Review(props) {
       </Grid>
       <Grid item container direction="column">
         <Accordion
+          className={classes.Accordion}
           expanded={expanded === 'panel1'}
           onChange={handleChange('panel1')}>
           <AccordionSummary
@@ -100,6 +102,7 @@ export default function Review(props) {
           </AccordionDetails>
         </Accordion>
         <Accordion
+          className={classes.Accordion}
           expanded={expanded === 'panel2'}
           onChange={handleChange('panel2')}>
           <AccordionSummary

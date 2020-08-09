@@ -18,22 +18,19 @@ const useStyles = makeStyles({
 export default function DenseTable(props) {
   const classes = useStyles();
 
-  function createData(username, email, contact) {
-    return { username, email, contact };
+  function createData(username, email) {
+    return { username, email };
   }
 
   const rows = () =>
-    props.data.map(({ username, email, contact }) =>
-      createData(username, email, contact)
-    );
+    props.data.map(({ username, email }) => createData(username, email));
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Username</TableCell>
             <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Contact&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -43,7 +40,6 @@ export default function DenseTable(props) {
                 {row.username}
               </TableCell>
               <TableCell align="right">{row.email}</TableCell>
-              <TableCell align="right">{row.contact}</TableCell>
             </TableRow>
           ))}
         </TableBody>
