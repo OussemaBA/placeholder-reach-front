@@ -70,8 +70,6 @@ const ModeratorNewForm = props => {
       state: 'active'
     };
 
-    console.log('dataTosubmit:', dataTosubmit);
-
     try {
       await axios.post(`${Api.baseURL}/register`, dataTosubmit);
     } catch (error) {
@@ -141,6 +139,7 @@ const ModeratorNewForm = props => {
           <ModeratorGroupsSelector
             className={classes.formFields}
             onSetGroups={handleSelectdGroups}
+            predefinedGroup={props.group}
           />
           <Grid spacing={2}>
             <Box display="flex" justifyContent="center" m={1} p={1}>

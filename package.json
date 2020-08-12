@@ -60,6 +60,7 @@
     "react-scripts": "^3.4.1",
     "react-toast-notifications": "^2.4.0",
     "react-toastify": "^6.0.8",
+    "react-window": "^1.8.5",
     "read-more-react": "^1.0.10",
     "recompose": "^0.30.0",
     "redux": "^4.0.5",

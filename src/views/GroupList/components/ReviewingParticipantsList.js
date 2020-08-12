@@ -6,29 +6,39 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import moment from 'moment';
 
-const useStyles = makeStyles({});
-
-function createData(login, contact) {
-  return { login, contact };
-}
+const useStyles = makeStyles({
+  table: {
+    width: 'auto'
+  }
+});
 
 export default function DenseTable(props) {
   const classes = useStyles();
 
+  function createData(login, contact) {
+    return { login, contact };
+  }
+
   const rows = () =>
-    props.data.map(({ login, contact }) => createData(login, contact));
+    props.data?.map(({ login, contact }) => createData(login, contact));
   return (
-    <TableContainer overflow="auto">
-      <Table className={classes.table} aria-label="a dense table">
+    <Table
+      fullwidth
+      className={classes.table}
+      size="small"
+      aria-label="a dense table">
+      <Paper elevation={3}>
         <TableHead>
           <TableRow>
             <TableCell>Login</TableCell>
-            <TableCell align="right">Contact&nbsp;</TableCell>
+            <TableCell align="right">Contact</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows().map(row => (
+          {rows()?.map(row => (
             <TableRow key={row.login}>
               <TableCell component="th" scope="row">
                 {row.login}
@@ -37,7 +47,7 @@ export default function DenseTable(props) {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
-    </TableContainer>
+      </Paper>
+    </Table>
   );
 }

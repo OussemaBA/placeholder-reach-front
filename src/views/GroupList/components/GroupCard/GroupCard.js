@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
@@ -9,15 +8,38 @@ import {
   Typography,
   Grid,
   Divider,
-  Avatar
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  Backdrop
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Link as RouterLink } from 'react-router-dom';
-import ReadMoreReact from 'read-more-react';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import Review from '../Review';
+import DialogContent from '@material-ui/core/DialogContent';
+import ViewOptionTabs from '../ViewOptionTabs';
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#f50a68'
+    },
+    secondary: {
+      main: '#11cb5f'
+    }
+  }
+});
 
 const useStyles = makeStyles(theme => ({
-  root: { margin: '2%', width: 300, height: 120 },
+  root: {
+    boxShadow: '5px 5px 5px #ca1551',
+    margin: '2%',
+    width: 300,
+    height: 125
+  },
   imageContainer: {
     height: 64,
     width: 64,
@@ -46,22 +68,23 @@ const useStyles = makeStyles(theme => ({
 
 const GroupCard = props => {
   const { className, Group, ...rest } = props;
+  const [open, setOpen] = useState(false);
 
+  const ModelHandleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const ModelHandleClickClose = () => {
+    setOpen(false);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const classes = useStyles();
 
-  const maxLength = 80;
   return (
     <Card {...rest} className={classes.root}>
       <CardContent>
-        {/* <div className={classes.imageContainer}>
-          <Avatar
-            alt={Group.name}
-            className={classes.avatar}
-            component={RouterLink}
-            src={Group.avatar}
-            to="/settings"
-          />
-        </div> */}
         <Typography align="center" gutterBottom variant="h6">
           {Group.name}
         </Typography>
@@ -71,17 +94,53 @@ const GroupCard = props => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Grid container justify="space-between">
-          <Grid className={classes.statsItem} item>
-            <RouterLink to="/">View </RouterLink>
+        {
+          //theme Provider for customization
+        }
+        <ThemeProvider theme={theme}>
+          <Grid container justify="space-between">
+            <Grid className={classes.statsItem} item>
+              <Button
+                size="small"
+                color="primary"
+                onClick={ModelHandleClickOpen}>
+                <Typography variant="subtitle2">View</Typography>
+              </Button>
+              <Dialog
+                fullScreen
+                onClose={ModelHandleClickClose}
+                open={open}
+                scroll={'paper'}>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                  <Typography align="center" variant="h6" gutterBottom>
+                    {Group?.name}
+                  </Typography>
+                </DialogTitle>
+
+                <ViewOptionTabs GroupData={Group} />
+                <DialogActions>
+                  <Button autoFocus onClick={handleClose} color="primary">
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+            <Grid className={classes.statsItem} item>
+              <RouterLink to="/">
+                <Button size="small" color="primary">
+                  <Typography variant="subtitle2">Edit</Typography>
+                </Button>
+              </RouterLink>
+            </Grid>
+            <Grid className={classes.statsItem} item>
+              <RouterLink to="/">
+                <Button size="small" color="primary">
+                  <Typography variant="subtitle2">Delete</Typography>
+                </Button>
+              </RouterLink>
+            </Grid>
           </Grid>
-          <Grid className={classes.statsItem} item>
-            <RouterLink to="/">Edit</RouterLink>
-          </Grid>
-          <Grid className={classes.statsItem} item>
-            <RouterLink to="/">Delete</RouterLink>
-          </Grid>
-        </Grid>
+        </ThemeProvider>
       </CardActions>
     </Card>
   );

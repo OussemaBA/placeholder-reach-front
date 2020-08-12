@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
+import { FixedSizeList } from 'react-window';
 
 const useStyles = makeStyles({
   table: {
@@ -23,10 +24,10 @@ export default function DenseTable(props) {
   }
 
   const rows = () =>
-    props.data.map(({ username, email }) => createData(username, email));
+    props.data?.map(({ username, email }) => createData(username, email));
   return (
-    <TableContainer>
-      <Table className={classes.table} size="small" aria-label="a dense table">
+    <Table className={classes.table} size="small" aria-label="a dense table">
+      <Paper elevation={3}>
         <TableHead>
           <TableRow>
             <TableCell>Username</TableCell>
@@ -34,7 +35,7 @@ export default function DenseTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows().map(row => (
+          {rows()?.map(row => (
             <TableRow key={row.email}>
               <TableCell component="th" scope="row">
                 {row.username}
@@ -43,7 +44,7 @@ export default function DenseTable(props) {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
-    </TableContainer>
+      </Paper>
+    </Table>
   );
 }

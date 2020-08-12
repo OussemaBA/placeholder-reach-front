@@ -13,19 +13,23 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const ParticipantGroupsField = props => {
-  const { groups, fetchGroups } = props;
+  const { predefinedGroup, groups, fetchGroups } = props;
   const initialState = () => [];
-  const [selectedGroups, setGroups] = React.useState(initialState);
+  const [selectedGroups, setGroups] = React.useState(predefinedGroup._id);
   const [data, setData] = React.useState(initialState);
 
   useEffect(() => {
     fetchGroups();
+
+    console.log('predefinedGroup:', predefinedGroup);
+    console.log('selectedGroups:', selectedGroups);
   }, []);
 
   useEffect(() => {
     setData(groups.groups);
+    console.log('selectedGroups:', selectedGroups);
     props.onSetGroups(selectedGroups);
-  }, [groups.groups]);
+  }, [groups.groups, selectedGroups]);
 
   return (
     <>
@@ -51,7 +55,7 @@ const ParticipantGroupsField = props => {
         onChange={(event, value) => {
           let items = new Set();
 
-          const values = value.map(item => item.name);
+          const values = value.map(item => item._id);
           items.add(values);
 
           setGroups(...items);

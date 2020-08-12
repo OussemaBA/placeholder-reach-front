@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { IconButton, Grid, Typography } from '@material-ui/core';
+import {
+  IconButton,
+  Grid,
+  Typography,
+  CircularProgress
+} from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchBar from '../../utils/Search/SearchBars';
@@ -14,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2)
   },
   content: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(4)
   },
   pagination: {
     marginTop: theme.spacing(3),
@@ -47,22 +52,28 @@ const GroupList = props => {
     setGroupsList(groups.groups);
   }, [groups.groups]);
 
-  return (
-    <div className={classes.root}>
-      <GroupsToolbar />
-      <SearchBar
-        whatTosearchFor={'Search for a Moderators'}
-        fields={fields}
-        data={groups.groups}
-        onSearchForData={handleSearchData}
-      />
-
+  const renderGroupsCards = () => {
+    if (!GroupsList || GroupsList.length === 0)
+      return <CircularProgress color="secondary" className={classes.content} />;
+    return (
       <Grid container className={classes.cardList}>
         {GroupsList.map(group => (
           <GroupCard Group={group} />
         ))}
       </Grid>
+    );
+  };
 
+  return (
+    <div className={classes.root}>
+      <GroupsToolbar />
+      <SearchBar
+        whatTosearchFor={'Search for a Group'}
+        fields={fields}
+        data={groups.groups}
+        onSearchForData={handleSearchData}
+      />
+      {renderGroupsCards()}
       <div className={classes.pagination}>
         <Typography variant="caption">1-6 of 20</Typography>
         <IconButton>

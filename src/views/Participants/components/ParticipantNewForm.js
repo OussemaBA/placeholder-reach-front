@@ -19,9 +19,6 @@ import { Api } from '../../../config/constants';
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
-  errorMessages: {
-    color: 'red'
-  },
   formFields: {
     marginTop: '10px'
   },

@@ -65,8 +65,8 @@ export default function Checkout(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isDisabled, setDisabled] = React.useState(true);
   const [formValues, setformValues] = React.useState({
-    grpName: '',
-    grpDesc: '',
+    name: '',
+    desc: '',
     moderators: [],
     participants: []
   });
@@ -75,8 +75,8 @@ export default function Checkout(props) {
     setDisabled(true);
 
     const dataTosubmit = {
-      name: formValues.grpName,
-      desc: formValues.grpDesc,
+      name: formValues.name,
+      desc: formValues.desc,
       participants: formValues.moderators,
       moderators: formValues.participants,
       state: 'unhidden',
@@ -124,8 +124,8 @@ export default function Checkout(props) {
         return (
           <GroupInfos
             onChangeFormValidation={realtimeErrorHandler}
-            grpDesc={formValues.grpDesc}
-            grpName={formValues.grpName}
+            grpDesc={formValues.desc}
+            grpName={formValues.name}
           />
         );
       case 1:
