@@ -12,22 +12,19 @@ import { connect } from 'react-redux';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const ParticipantGroupsField = props => {
+const GroupsSelector = props => {
   const { predefinedGroup, groups, fetchGroups } = props;
   const initialState = () => [];
-  const [selectedGroups, setGroups] = React.useState(predefinedGroup._id);
+  const [selectedGroups, setGroups] = React.useState(predefinedGroup?._id);
   const [data, setData] = React.useState(initialState);
 
   useEffect(() => {
     fetchGroups();
-
-    console.log('predefinedGroup:', predefinedGroup);
-    console.log('selectedGroups:', selectedGroups);
   }, []);
 
   useEffect(() => {
+    console.log('groups:', groups);
     setData(groups.groups);
-    console.log('selectedGroups:', selectedGroups);
     props.onSetGroups(selectedGroups);
   }, [groups.groups, selectedGroups]);
 
@@ -35,20 +32,29 @@ const ParticipantGroupsField = props => {
     <>
       <Autocomplete
         multiple
+        defaultValue={predefinedGroup === undefined ? [] : [predefinedGroup]}
         limitTags={2}
         options={data}
         disableCloseOnSelect
-        getOptionLabel={option => {
-          return option.name;
-        }}
+        getOptionLabel={option => option.name}
         renderOption={(option, { selected }) => (
           <React.Fragment>
-            <Checkbox
-              icon={icon}
-              checkedIcon={checkedIcon}
-              style={{ marginRight: 8 }}
-              checked={selected}
-            />
+            {console.log('option:', option)}
+            {option._id === predefinedGroup?._id ? (
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={true}
+              />
+            ) : (
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+            )}
             {option.name}
           </React.Fragment>
         )}
@@ -60,15 +66,17 @@ const ParticipantGroupsField = props => {
 
           setGroups(...items);
         }}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            margin="normal"
-            label="Add to Groups"
-            fullWidth
-          />
-        )}
+        renderInput={params => {
+          return (
+            <TextField
+              {...params}
+              variant="outlined"
+              margin="normal"
+              label="Add to Groups"
+              fullWidth
+            />
+          );
+        }}
       />
     </>
   );
@@ -78,6 +86,4 @@ const mapStateToProps = ({ groups }) => ({
   groups
 });
 
-export default connect(mapStateToProps, { fetchGroups })(
-  ParticipantGroupsField
-);
+export default connect(mapStateToProps, { fetchGroups })(GroupsSelector);

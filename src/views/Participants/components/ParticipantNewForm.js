@@ -147,6 +147,7 @@ const ParticipantNewForm = props => {
           <ParticipantGroupsSelector
             className={classes.formFields}
             onSetGroups={handleSelectdGroups}
+            predefinedGroup={props.group}
           />
 
           <Grid container spacing={2} className={classes.formTitle}>

@@ -62,7 +62,7 @@ const GroupsToolbar = props => {
           color="primary"
           onClick={ModelHandleClickOpen}
           variant="contained">
-          ADD Group
+          New group
         </Button>
         <div>
           <Dialog

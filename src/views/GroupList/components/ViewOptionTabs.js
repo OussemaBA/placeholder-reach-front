@@ -10,8 +10,7 @@ import {
   Grid,
   Link,
   Dialog,
-  DialogContent,
-  Button
+  DialogContent
 } from '@material-ui/core';
 import ReviewingModeratorsList from './ReviewingModeratorsList';
 import ReviewingParticipantsList from './ReviewingParticipantsList';
@@ -19,6 +18,10 @@ import ListingDataOf from './ListingDataOf';
 import PropTypes from 'prop-types';
 import ModeratorNewForm from '../../Moderators/components/ModeratorNewForm';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { fetchModerators } from '../../../actions';
+import { connect } from 'react-redux';
+import ParticipantNewForm from '../../Participants/components/ParticipantNewForm';
+import PollNewForm from '../../Polls/PollNewForm';
 
 const useStyles = makeStyles(theme => ({
   groupDescription: {
@@ -56,7 +59,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired
 };
 
-export default function ViewOptionTabs(props) {
+const ViewOptionTabs = props => {
   const { GroupData } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -68,11 +71,11 @@ export default function ViewOptionTabs(props) {
 
     setValue(newValue);
   };
-  const ModelHandleClickOpen = () => {
+  const ModalHandleClickOpen = () => {
     setOpen(true);
   };
 
-  const ModelHandleClickClose = () => {
+  const ModalHandleClickClose = () => {
     // we refrech  the moderators list table after adding new one
     //fetchModerators();
     setOpen(false);
@@ -124,14 +127,15 @@ export default function ViewOptionTabs(props) {
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" className={classes.total}>
-              {GroupData?.moderators.length}
+              {GroupData.moderators.length}
+              {console.log('GroupData:', GroupData)}
             </Typography>
           </Grid>
           <Grid item>
             <Link
               component="button"
               variant="body2"
-              onClick={ModelHandleClickOpen}>
+              onClick={ModalHandleClickOpen}>
               <Grid
                 style={{ marginLeft: '20px' }}
                 container
@@ -145,21 +149,21 @@ export default function ViewOptionTabs(props) {
             </Link>
           </Grid>
         </Grid>
-        <ReviewingModeratorsList data={GroupData?.moderators} />
+        <ReviewingModeratorsList data={GroupData.moderators} />
 
         {
           //Moderator Modal
         }
 
         <Dialog
-          onClose={ModelHandleClickClose}
+          onClose={ModalHandleClickClose}
           open={open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description">
           <DialogContent>
             <ModeratorNewForm
               group={GroupData}
-              CloseModal={ModelHandleClickClose}
+              CloseModal={ModalHandleClickClose}
             />
           </DialogContent>
         </Dialog>
@@ -169,37 +173,112 @@ export default function ViewOptionTabs(props) {
         {
           // Participants list
         }
-        <Grid container>
-          <Grid item xs>
+
+        <Grid
+          container
+          className={classes.ModeratorsList}
+          justify="flex-start"
+          alignItems="center">
+          <Grid item>
             <Typography className={classes.secondaryHeading}>
-              Participants
+              Total :
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" className={classes.total}>
-              {GroupData?.participants.length}
+              {GroupData.participants.length}
             </Typography>
           </Grid>
+          <Grid item>
+            <Link
+              component="button"
+              variant="body2"
+              onClick={ModalHandleClickOpen}>
+              <Grid
+                style={{ marginLeft: '20px' }}
+                container
+                alignItems="center"
+                justify="flex-start">
+                <Grid item style={{ marginRight: '8px' }}>
+                  <PersonAddIcon />
+                </Grid>
+                <Grid item>New participants</Grid>
+              </Grid>
+            </Link>
+          </Grid>
         </Grid>
-        <ReviewingParticipantsList data={props.GroupData?.participants} />
+        <ReviewingParticipantsList data={GroupData.participants} />
+
+        {
+          //Participants Modal
+        }
+
+        <Dialog
+          onClose={ModalHandleClickClose}
+          open={open}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogContent>
+            <ParticipantNewForm
+              group={GroupData}
+              CloseModal={ModalHandleClickClose}
+            />
+          </DialogContent>
+        </Dialog>
       </TabPanel>
 
       <TabPanel value={value} index={3}>
         {
           // Polls
         }
-        <Grid container>
-          <Grid item xs>
-            <Typography className={classes.secondaryHeading}>Polls</Typography>
+        <Grid
+          container
+          className={classes.ModeratorsList}
+          justify="flex-start"
+          alignItems="center">
+          <Grid item>
+            <Typography className={classes.secondaryHeading}>
+              Total :
+            </Typography>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" className={classes.total}>
-              {GroupData?.polls.length}
+              {GroupData.moderators.length}
             </Typography>
           </Grid>
-          <ListingDataOf polls={GroupData.polls} />
+          <Grid item>
+            <Link
+              component="button"
+              variant="body2"
+              onClick={ModalHandleClickOpen}>
+              <Grid
+                style={{ marginLeft: '20px' }}
+                container
+                alignItems="center"
+                justify="flex-start">
+                <Grid item style={{ marginRight: '8px' }}>
+                  <PersonAddIcon />
+                </Grid>
+                <Grid item>New Poll</Grid>
+              </Grid>
+            </Link>
+          </Grid>
         </Grid>
+        <ListingDataOf polls={GroupData.polls} />
+        {
+          //Poll Modal
+        }
+        <Dialog
+          onClose={ModalHandleClickClose}
+          open={open}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogContent>
+            <PollNewForm group={GroupData} CloseModal={ModalHandleClickClose} />
+          </DialogContent>
+        </Dialog>
       </TabPanel>
+
       <TabPanel value={value} index={4}>
         {
           // DISCUSSIONS
@@ -220,4 +299,10 @@ export default function ViewOptionTabs(props) {
       </TabPanel>
     </>
   );
-}
+};
+
+const mapStateToProps = ({ moderators }) => ({
+  moderators
+});
+
+export default connect(mapStateToProps, { fetchModerators })(ViewOptionTabs);

@@ -14,8 +14,9 @@ import {
   DialogTitle,
   Backdrop
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import { fetchModerators, fetchGroups } from '../../../../actions';
+import { connect } from 'react-redux';
+
 import { Link as RouterLink } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -151,4 +152,11 @@ GroupCard.propTypes = {
   Group: PropTypes.object.isRequired
 };
 
-export default GroupCard;
+const mapStateToProps = ({ groups, moderators }) => ({
+  groups,
+  moderators
+});
+
+export default connect(mapStateToProps, { fetchModerators, fetchGroups })(
+  GroupCard
+);

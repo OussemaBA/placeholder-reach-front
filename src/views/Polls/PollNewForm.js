@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import { fetchModerators } from '../../../actions';
+import { fetchModerators } from '../../actions';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Box, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
-import ModeratorPasswordGeneratorField from '../../../utils/Pwd/PasswordGeneratorField';
-import { snackbarErrorHandler } from '../../../utils/snackbar';
-import ModeratorGroupsSelector from '../../../utils/GroupsSelector';
+import ModeratorPasswordGeneratorField from '../../utils/Pwd/PasswordGeneratorField';
+import { snackbarErrorHandler } from '../../utils/snackbar';
+import ModeratorGroupsSelector from '../../utils/GroupsSelector';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
-import { handleErrorToastr, handleSuccessToastr } from '../../../utils/toastr';
-import { Api } from '../../../config/constants';
+import { handleErrorToastr, handleSuccessToastr } from '../../utils/toastr';
+import { Api } from '../../config/constants';
 import axios from 'axios';
+import QuestionType from './QuestionType';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -96,51 +97,26 @@ const ModeratorNewForm = props => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Create New Moderator
+          NEW POLL
         </Typography>
         <form
           className={classes.form}
           onSubmit={handleSubmit(submitData)}
           noValidate>
+          <QuestionType />
+
           <TextField
             variant="outlined"
             margin="normal"
             inputRef={register()}
             required
             fullWidth
-            label="name"
-            name="moderator_name"
-            autoFocus
-          />
-          {snackbarErrorHandler(errors.moderator_name)}
-          <TextField
-            variant="outlined"
-            margin="normal"
-            inputRef={register()}
-            required
-            fullWidth
-            label="Email"
+            label="Question"
             name="moderator_email"
             autoFocus
           />
           {snackbarErrorHandler(errors.moderator_email)}
-          <TextField
-            variant="outlined"
-            margin="normal"
-            inputRef={register()}
-            required
-            fullWidth
-            label="Contact Number"
-            name="moderator_contact"
-            autoFocus
-          />
-          {snackbarErrorHandler(errors.moderator_contact)}
-          <ModeratorPasswordGeneratorField onSetPassword={handlePassword} />
-          <ModeratorGroupsSelector
-            className={classes.formFields}
-            onSetGroups={handleSelectdGroups}
-            predefinedGroup={props.group}
-          />
+
           <Grid spacing={2}>
             <Box display="flex" justifyContent="center" m={1} p={1}>
               <Box>

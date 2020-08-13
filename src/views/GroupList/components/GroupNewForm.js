@@ -124,8 +124,8 @@ export default function Checkout(props) {
         return (
           <GroupInfos
             onChangeFormValidation={realtimeErrorHandler}
-            grpDesc={formValues.desc}
-            grpName={formValues.name}
+            desc={formValues.desc}
+            name={formValues.name}
           />
         );
       case 1:
@@ -155,7 +155,7 @@ export default function Checkout(props) {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            CREATE A NEW GROUP
+            NEW GROUP
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map(label => (

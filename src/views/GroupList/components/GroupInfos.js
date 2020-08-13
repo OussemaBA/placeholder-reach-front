@@ -46,8 +46,8 @@ export default function GroupInfos(props) {
   });
 
   useEffect(() => {
-    setValue('grp_name', props?.grpName, { shouldDirty: true });
-    setValue('grp_desc', props?.grpDesc, { shouldDirty: true });
+    setValue('grp_name', props?.name, { shouldDirty: true });
+    setValue('grp_desc', props?.desc, { shouldDirty: true });
   }, []);
 
   return (
@@ -74,7 +74,7 @@ export default function GroupInfos(props) {
             onChange={() => {
               return props.onChangeFormValidation(
                 formState.isValid,
-                'grpName',
+                'name',
                 getValues('grp_name')
               );
             }}
@@ -94,7 +94,7 @@ export default function GroupInfos(props) {
             onChange={() => {
               return props.onChangeFormValidation(
                 formState.isValid,
-                'grpDesc',
+                'desc',
                 getValues('grp_desc')
               );
             }}
