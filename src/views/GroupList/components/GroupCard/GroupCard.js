@@ -76,6 +76,7 @@ const GroupCard = props => {
   };
 
   const ModelHandleClickClose = () => {
+    props.fetchGroups();
     setOpen(false);
   };
   const handleClose = () => {
@@ -152,4 +153,8 @@ GroupCard.propTypes = {
   Group: PropTypes.object.isRequired
 };
 
-export default GroupCard;
+const mapStateToProps = ({ groups }) => ({
+  groups
+});
+
+export default connect(mapStateToProps, { fetchGroups })(GroupCard);

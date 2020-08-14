@@ -72,7 +72,7 @@ const PollNewForm = props => {
     };
 
     try {
-      let res = await axios.post(`${Api.baseURL}/addPoll`, dataTosubmit);
+      // await axios.post(`${Api.baseURL}/addPoll`, dataTosubmit);
     } catch (error) {
       if (error.message == 'Network Error') {
         handleErrorToastr(error.message, () => props.CloseModal());

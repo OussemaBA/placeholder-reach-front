@@ -25,19 +25,11 @@ export default function Poll(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const ModalHandleClickOpen = () => {
-    setOpen(true);
-  };
-  const ModalHandleClickClose = () => {
-    // we refrech  the moderators list table after adding new one
-    //fetchModerators();
-    setOpen(false);
-  };
 
   const getPollData = async () => {
     let res;
     try {
-      res = await axios.get(`${Api.baseURL}/getPoll/${props.poll._id}`);
+      res = await axios.get(`${Api.baseURL}/getPoll/${props.poll}`);
       setData(res.data);
     } catch (error) {
       if (error.message == 'Network Error') {

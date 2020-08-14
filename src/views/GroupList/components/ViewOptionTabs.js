@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -18,7 +18,7 @@ import ListingDataOf from './ListingDataOf';
 import PropTypes from 'prop-types';
 import ModeratorNewForm from '../../Moderators/components/ModeratorNewForm';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import { fetchModerators } from '../../../actions';
+import { fetchModerators, fetchGroups } from '../../../actions';
 import { connect } from 'react-redux';
 import ParticipantNewForm from '../../Participants/components/ParticipantNewForm';
 import PollNewForm from '../../Polls/PollNewForm';
@@ -60,10 +60,11 @@ TabPanel.propTypes = {
 };
 
 const ViewOptionTabs = props => {
-  const { GroupData } = props;
+  const { GroupData, groups } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = useState(false);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -72,8 +73,6 @@ const ViewOptionTabs = props => {
   };
 
   const ModalHandleClickClose = () => {
-    // we refrech  the moderators list table after adding new one
-    //fetchModerators();
     setOpen(false);
   };
 
@@ -209,7 +208,7 @@ const ViewOptionTabs = props => {
         }
 
         <Dialog
-          onClose={ModalHandleClickClose}
+          // onClose={ModalHandleClickClose}
           open={open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description">
@@ -238,7 +237,7 @@ const ViewOptionTabs = props => {
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" className={classes.total}>
-              {GroupData.moderators.length}
+              {GroupData.polls.length}
             </Typography>
           </Grid>
           <Grid item>
@@ -259,6 +258,7 @@ const ViewOptionTabs = props => {
             </Link>
           </Grid>
         </Grid>
+        {console.log('polls:', GroupData.polls)}
         <ListingDataOf polls={GroupData.polls} />
         {
           //Poll Modal
@@ -297,7 +297,7 @@ const ViewOptionTabs = props => {
 };
 
 const mapStateToProps = ({ moderators }) => ({
-  moderators
+  // moderators
 });
 
-export default connect(mapStateToProps, { fetchModerators })(ViewOptionTabs);
+export default connect(mapStateToProps, { fetchGroups })(ViewOptionTabs);
