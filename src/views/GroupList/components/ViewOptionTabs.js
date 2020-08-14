@@ -65,10 +65,6 @@ const ViewOptionTabs = props => {
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = useState(false);
   const handleChange = (event, newValue) => {
-    {
-      console.log('newValue:', newValue);
-    }
-
     setValue(newValue);
   };
   const ModalHandleClickOpen = () => {
@@ -128,7 +124,6 @@ const ViewOptionTabs = props => {
           <Grid item>
             <Typography variant="subtitle1" className={classes.total}>
               {GroupData.moderators.length}
-              {console.log('GroupData:', GroupData)}
             </Typography>
           </Grid>
           <Grid item>

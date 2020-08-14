@@ -7,14 +7,12 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { connect } from 'react-redux';
 import withCookies from '../../../../HOC/withCookies';
 import { compose } from 'recompose';
 import { withTranslation } from 'react-i18next';
 import { changeLanguage } from '../../../../actions';
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav } from './components';
 import { routes } from '../../../../config/constants';
 
 const useStyles = makeStyles(theme => ({
@@ -71,23 +69,6 @@ const Sidebar = props => {
       href: routes.MODERATORS,
       icon: <AccountBoxIcon />
     }
-    // {
-    //   title: 'Authentication',
-    //   href: '/sign-in',
-    //   icon: <LockOpenIcon />
-    // },
-
-    // {
-    //   title: 'Icons',
-    //   href: '/icons',
-    //   icon: <ImageIcon />
-    // },
-
-    // {
-    //   title: 'Settings',
-    //   href: '/settings',
-    //   icon: <SettingsIcon />
-    // }
   ];
 
   return (

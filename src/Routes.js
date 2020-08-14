@@ -11,8 +11,6 @@ import {
   ParticipantsList as ParticipantsListView,
   Icons as IconsView,
   ModeratorsList as ModeratorsListView,
-  Settings as SettingsView,
-  SignUp as SignUpView,
   NotFound as NotFoundView
 } from './views';
 import { routes } from './config/constants';
@@ -40,29 +38,11 @@ const Routes = () => {
         path={routes.GROUPS}
       />
 
-      <PrivateRouteWithLayout
-        component={IconsView}
-        exact
-        layout={MainLayout}
-        path="/icons"
-      />
       <PublicRoute
         component={ModeratorsListView}
         exact
         layout={MainLayout}
         path={routes.MODERATORS}
-      />
-      <PrivateRouteWithLayout
-        component={SettingsView}
-        exact
-        layout={MainLayout}
-        path="/settings"
-      />
-      <PrivateRouteWithLayout
-        component={SignUpView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-up"
       />
 
       <PublicRoute

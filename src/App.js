@@ -21,8 +21,6 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { connect } from 'react-redux';
 import withCookies from './HOC/withCookies';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'recompose';
 import { changeLanguage, changeDirection } from './actions';
 import 'fontsource-roboto';
 

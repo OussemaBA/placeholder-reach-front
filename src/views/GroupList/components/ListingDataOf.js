@@ -1,5 +1,5 @@
 import React from 'react';
-import Poll from './Poll';
+import Poll from '../../Polls/Poll';
 import Discussion from './Discussion';
 import { Divider, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PollsList = ({ polls, discussions }) => {
+const ListingDataOf = ({ polls, discussions }) => {
   const classes = useStyles();
 
   return (
@@ -33,4 +33,4 @@ const PollsList = ({ polls, discussions }) => {
   );
 };
 
-export default PollsList;
+export default ListingDataOf;

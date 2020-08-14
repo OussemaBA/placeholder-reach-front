@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { fetchModerators } from '../../actions';
 import { connect } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
 
 import { ModeratorsTable, ModeratorsToolbar } from './components/index';
 import CircularProgress from '@material-ui/core/CircularProgress';

@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 // base options for toastr
 

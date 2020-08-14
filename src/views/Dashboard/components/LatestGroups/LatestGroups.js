@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/styles';
 import Table from '@material-ui/core/Table';
@@ -11,23 +10,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
-
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  IconButton,
-  Avatar,
-  Typography
-} from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import { connect } from 'react-redux';
 

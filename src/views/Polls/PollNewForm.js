@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import { fetchModerators } from '../../actions';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Box, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
-import ModeratorPasswordGeneratorField from '../../utils/Pwd/PasswordGeneratorField';
 import { snackbarErrorHandler } from '../../utils/snackbar';
-import ModeratorGroupsSelector from '../../utils/GroupsSelector';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { handleErrorToastr, handleSuccessToastr } from '../../utils/toastr';
 import { Api } from '../../config/constants';
 import axios from 'axios';
 import QuestionType from './QuestionType';
+import PollChoices from './PollChoices';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -40,39 +37,42 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const schema = yup.object().shape({
-  moderator_name: yup.string().required('Moderator Name is required'),
-  moderator_email: yup
-    .string()
-    .email()
-    .required('Moderator Name is required'),
-  moderator_contact: yup.string().required('Moderator contact is required')
+  question: yup.string().required(' Question field  is required')
 });
 
-const ModeratorNewForm = props => {
+const PollNewForm = props => {
   const classes = useStyles();
-  const [moderatorPassword, setModeratorPassword] = useState();
-  const [moderatorSelectedGroups, setModeratorSelectedGroups] = useState();
   const [disabled, setDisabled] = useState(false);
+  const [choices, setChoices] = useState([]);
+  const [qType, setQType] = useState([]);
   const { register, handleSubmit, errors, getValues } = useForm({
     resolver: yupResolver(schema)
   });
 
+  const handeQuestiontype = QType => {
+    setQType(QType);
+  };
+
+  const handleChoices = choices => {
+    setChoices(choices);
+  };
+
   const submitData = async () => {
     setDisabled(true);
-    const values = getValues();
 
+    const values = getValues('question');
     const dataTosubmit = {
-      username: values.moderator_name,
-      role: 'moderator',
-      email: values.moderator_email,
-      password: moderatorPassword,
-      groupes: moderatorSelectedGroups,
-      contact: values.moderator_contact,
-      state: 'active'
+      group_id: props.group._id,
+      type: qType,
+      question: values,
+      answers: [],
+      answerers_id: [],
+      choices: choices,
+      state: 'unhidden'
     };
-    console.log('dataTosubmit:', dataTosubmit);
+
     try {
-      await axios.post(`${Api.baseURL}/register`, dataTosubmit);
+      let res = await axios.post(`${Api.baseURL}/addPoll`, dataTosubmit);
     } catch (error) {
       if (error.message == 'Network Error') {
         handleErrorToastr(error.message, () => props.CloseModal());
@@ -80,66 +80,61 @@ const ModeratorNewForm = props => {
       return Error();
     }
 
-    handleSuccessToastr('Moderator  created successfully', () => {
+    handleSuccessToastr('Poll created successfully', () => {
       props.CloseModal();
     });
   };
 
-  const handlePassword = PwdValue => {
-    setModeratorPassword(PwdValue);
-  };
-
-  const handleSelectdGroups = selectedGroups => {
-    setModeratorSelectedGroups(selectedGroups);
-  };
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          NEW POLL
-        </Typography>
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit(submitData)}
-          noValidate>
-          <QuestionType />
+    <div>
+      <Typography component="h1" variant="h5">
+        NEW POLL
+      </Typography>
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit(submitData)}
+        noValidate>
+        <QuestionType questionType={handeQuestiontype} />
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            inputRef={register()}
-            required
-            fullWidth
-            label="Question"
-            name="moderator_email"
-            autoFocus
-          />
-          {snackbarErrorHandler(errors.moderator_email)}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          inputRef={register()}
+          required
+          fullWidth
+          label="Question"
+          name="question"
+          autoFocus
+        />
+        {snackbarErrorHandler(errors.question)}
 
-          <Grid spacing={2}>
-            <Box display="flex" justifyContent="center" m={1} p={1}>
-              <Box>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  disabled={disabled}>
-                  <Typography variant="subtitle2">New Moderator</Typography>
-                </Button>
-              </Box>
-              <Box p={1}>
-                <Button fullWidth color="secondary" onClick={props.CloseModal}>
-                  Close
-                </Button>
-              </Box>
+        <PollChoices pollChoices={handleChoices} />
+        <Grid spacing={2}>
+          <Box display="flex" justifyContent="center" m={1} p={1}>
+            <Box>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={disabled}>
+                <Typography variant="subtitle2">New Poll</Typography>
+              </Button>
             </Box>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+            <Box p={1}>
+              <Button
+                type="submit"
+                fullWidth
+                color="secondary"
+                onClick={props.CloseModal}>
+                Close
+              </Button>
+            </Box>
+          </Box>
+        </Grid>
+      </form>
+    </div>
   );
 };
 
-export default ModeratorNewForm;
+export default PollNewForm;

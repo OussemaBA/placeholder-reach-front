@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  List,
-  Container,
-  makeStyles,
-  Avatar,
-  Typography
-} from '@material-ui/core';
+import { makeStyles, Avatar, Typography } from '@material-ui/core';
 import { fetchModerators } from '../../../actions';
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';

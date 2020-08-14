@@ -85,7 +85,6 @@ export default function Checkout(props) {
     };
 
     try {
-      console.log('dataTosubmit:', dataTosubmit);
       await axios.post(`${Api.baseURL}/addGroup`, dataTosubmit);
     } catch (error) {
       if (error.message === 'Network Error') {

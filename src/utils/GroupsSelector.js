@@ -23,7 +23,6 @@ const GroupsSelector = props => {
   }, []);
 
   useEffect(() => {
-    console.log('groups:', groups);
     setData(groups.groups);
     props.onSetGroups(selectedGroups);
   }, [groups.groups, selectedGroups]);
@@ -39,7 +38,6 @@ const GroupsSelector = props => {
         getOptionLabel={option => option.name}
         renderOption={(option, { selected }) => (
           <React.Fragment>
-            {console.log('option:', option)}
             {option._id === predefinedGroup?._id ? (
               <Checkbox
                 icon={icon}

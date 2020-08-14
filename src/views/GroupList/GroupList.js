@@ -6,6 +6,7 @@ import {
   Typography,
   CircularProgress
 } from '@material-ui/core';
+
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchBar from '../../utils/Search/SearchBars';
@@ -38,7 +39,7 @@ const GroupList = props => {
   const classes = useStyles();
   const { groups, fetchGroups } = props;
 
-  const [GroupsList, setGroupsList] = useState(groups.groups);
+  const [GroupsList, setGroupsList] = useState([]);
 
   const handleSearchData = data => {
     setGroupsList(data);
@@ -46,20 +47,22 @@ const GroupList = props => {
 
   useEffect(() => {
     fetchGroups();
+    setGroupsList(groups.groups);
   }, []);
 
   useEffect(() => {
     setGroupsList(groups.groups);
-  }, [groups.groups]);
+  }, [props.groups.groups]);
 
   const renderGroupsCards = () => {
-    if (!GroupsList || GroupsList.length === 0)
+    if (!GroupsList || GroupsList.length === 0) {
       return <CircularProgress color="secondary" className={classes.content} />;
+    }
     return (
       <Grid container className={classes.cardList}>
-        {GroupsList.map(group => (
-          <GroupCard Group={group} />
-        ))}
+        {GroupsList.map(group => {
+          return <GroupCard Group={group} />;
+        })}
       </Grid>
     );
   };
@@ -68,7 +71,7 @@ const GroupList = props => {
     <div className={classes.root}>
       <GroupsToolbar />
       <SearchBar
-        whatTosearchFor={'Search for a Group'}
+        whatTosearchFor={''}
         fields={fields}
         data={groups.groups}
         onSearchForData={handleSearchData}

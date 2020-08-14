@@ -66,7 +66,7 @@ const ParticipantNewForm = props => {
     try {
       await axios.post(`${Api.baseURL}/register`, dataTosubmit);
     } catch (error) {
-      if (error.message == 'Network Error') {
+      if (error.message === 'Network Error') {
         handleErrorToastr(error.message, () => props.CloseModal());
       }
       return Error();

@@ -5,7 +5,6 @@ import { changeLanguage, changeDirection } from '../actions';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -36,7 +36,7 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: '5px 5px 5px #ca1551',
+    boxShadow: '5px 5px 5px #131417',
     margin: '2%',
     width: 300,
     height: 125
@@ -152,11 +152,4 @@ GroupCard.propTypes = {
   Group: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ groups, moderators }) => ({
-  groups,
-  moderators
-});
-
-export default connect(mapStateToProps, { fetchModerators, fetchGroups })(
-  GroupCard
-);
+export default GroupCard;

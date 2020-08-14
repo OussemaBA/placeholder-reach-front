@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import { fetchModerators } from '../../../actions';
-import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Box, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
@@ -69,11 +67,10 @@ const ModeratorNewForm = props => {
       contact: values.moderator_contact,
       state: 'active'
     };
-    console.log('dataTosubmit:', dataTosubmit);
     try {
       await axios.post(`${Api.baseURL}/register`, dataTosubmit);
     } catch (error) {
-      if (error.message == 'Network Error') {
+      if (error.message === 'Network Error') {
         handleErrorToastr(error.message, () => props.CloseModal());
       }
       return Error();

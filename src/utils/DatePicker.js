@@ -8,6 +8,7 @@ const ParticipantDatePicker = props => {
   useEffect(() => {
     props.onSelectDate(selectedDate);
   }, []);
+
   const useStyles = makeStyles(theme => ({
     formFields: {
       marginTop: '10px'
