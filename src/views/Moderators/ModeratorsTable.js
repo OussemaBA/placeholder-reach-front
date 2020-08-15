@@ -50,7 +50,7 @@ const ModeratorsList = props => {
   };
   return (
     <div className={classes.root}>
-      <ModeratorsToolbar whatToAdd={'Add Moderators'} />
+      <ModeratorsToolbar whatToAdd={'Add Moderators'} data={moderatorsList} />
       <SearchBar
         whatTosearchFor={'Search for a Moderators'}
         fields={fields}

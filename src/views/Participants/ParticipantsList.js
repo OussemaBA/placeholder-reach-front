@@ -47,7 +47,10 @@ const ParticipantsList = props => {
   };
   return (
     <div className={classes.root}>
-      <ParticipantsToolbar whatToAdd={'New Participant'} />
+      <ParticipantsToolbar
+        whatToAdd={'New Participant'}
+        data={participantsList}
+      />
       <SearchBar
         fields={fields}
         data={participants.participants}

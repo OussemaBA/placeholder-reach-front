@@ -69,7 +69,7 @@ const GroupList = props => {
 
   return (
     <div className={classes.root}>
-      <GroupsToolbar />
+      <GroupsToolbar data={GroupsList} />
       <SearchBar
         whatTosearchFor={''}
         fields={fields}

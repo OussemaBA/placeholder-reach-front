@@ -71,7 +71,7 @@ export default function Discussion(props) {
                   <Chip
                     variant="outlined"
                     onDelete={handleDelete}
-                    color={data.visible_to_group ? 'primary' : 'secondary'}
+                    color={data.visible_to_group ? 'secondary' : 'primary'}
                     size="small"
                     label="Users can see replies"
                     deleteIcon={
@@ -84,7 +84,7 @@ export default function Discussion(props) {
                   <Chip
                     variant="outlined"
                     onDelete={handleDelete}
-                    color={data.users_see_replies ? 'primary' : 'secondary'}
+                    color={data.visible_to_group ? 'secondary' : 'primary'}
                     size="small"
                     label="Discussion visible to group"
                     deleteIcon={
@@ -101,7 +101,7 @@ export default function Discussion(props) {
 
           <Collapse in={expanded} timeout="auto">
             <Button size="small" color="primary">
-              Result
+              View
             </Button>
             <Button size="small" color="primary">
               Edit
@@ -110,7 +110,7 @@ export default function Discussion(props) {
               Hide
             </Button>
             <Button size="small" color="primary">
-              Export
+              Toggle discussion
             </Button>
             <Button size="small" color="primary">
               Delete

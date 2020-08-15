@@ -6,7 +6,7 @@ import { Button, Dialog, DialogContent, Slide } from '@material-ui/core';
 import { fetchModerators } from '../../../../actions';
 import { connect } from 'react-redux';
 import { ModeratorNewForm } from '..';
-
+import CSVExport from '../../../../utils/CSVExport/CSVExport';
 const useStyles = makeStyles(theme => ({
   root: {},
   row: {
@@ -48,12 +48,27 @@ const ModeratorsToolbar = props => {
     setOpen(false);
   };
 
+  const headers = [
+    { key: 'username', label: 'User name' },
+    { key: 'contact', label: 'Contact number' },
+    { key: 'email', label: 'Email' },
+
+    { key: 'birth_date', label: 'Date of birth' },
+    { key: 'created_at', label: 'Joined at' }
+  ];
+
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.row}>
         <span className={classes.spacer} />
         <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
+        <Button className={classes.exportButton}>
+          <CSVExport
+            data={props.data}
+            headers={headers}
+            filename={'Moderators.csv'}
+          />
+        </Button>
         <Button
           color="primary"
           variant="contained"

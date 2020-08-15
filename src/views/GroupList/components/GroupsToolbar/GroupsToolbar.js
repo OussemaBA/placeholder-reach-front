@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
-
+import CSVExport from '../../../../utils/CSVExport/CSVExport';
 import Slide from '@material-ui/core/Slide';
 import GroupsCreateNewForm from '../GroupNewForm';
 
@@ -52,12 +52,24 @@ const GroupsToolbar = props => {
 
   const classes = useStyles();
 
+  const headers = [
+    { key: 'name', label: 'Group Name' },
+    { key: 'desc', label: 'Group Description' }
+    // { key: 'moderators', label: 'Group moderators' },
+    // { key: 'participants', label: 'Group Participants' }
+  ];
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.row}>
         <span className={classes.spacer} />
         <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
+        <Button className={classes.exportButton}>
+          <CSVExport
+            data={props.data}
+            headers={headers}
+            filename={'Groups.csv'}
+          />
+        </Button>
         <Button
           color="primary"
           onClick={ModelHandleClickOpen}
