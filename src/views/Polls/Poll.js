@@ -29,7 +29,7 @@ export default function Poll(props) {
   const getPollData = async () => {
     let res;
     try {
-      res = await axios.get(`${Api.baseURL}/getPoll/${props.poll}`);
+      res = await axios.get(`${Api.baseURL}/getPoll/${props.pollID}`);
       setData(res.data);
     } catch (error) {
       if (error.message == 'Network Error') {

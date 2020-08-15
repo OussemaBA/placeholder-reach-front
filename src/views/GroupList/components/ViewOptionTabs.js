@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
+import DiscussionsNewForm from '../../Discussions/DiscussionsNewForm';
+
 import {
   Tab,
   Divider,
@@ -202,7 +204,6 @@ const ViewOptionTabs = props => {
           </Grid>
         </Grid>
         <ReviewingParticipantsList data={GroupData.participants} />
-
         {
           //Participants Modal
         }
@@ -258,7 +259,6 @@ const ViewOptionTabs = props => {
             </Link>
           </Grid>
         </Grid>
-        {console.log('polls:', GroupData.polls)}
         <ListingDataOf polls={GroupData.polls} />
         {
           //Poll Modal
@@ -278,19 +278,56 @@ const ViewOptionTabs = props => {
         {
           // DISCUSSIONS
         }
-        <Grid container>
-          <Grid item xs>
+        <Grid
+          container
+          className={classes.ModeratorsList}
+          justify="flex-start"
+          alignItems="center">
+          <Grid item>
             <Typography className={classes.secondaryHeading}>
-              Discussions
+              Total :
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" className={classes.total}>
-              {GroupData?.discussions.length}
+              {GroupData.discussions.length}
             </Typography>
           </Grid>
-          <ListingDataOf discussions={GroupData.discussions} />
+          <Grid item>
+            <Link
+              component="button"
+              variant="body2"
+              onClick={ModalHandleClickOpen}>
+              <Grid
+                style={{ marginLeft: '20px' }}
+                container
+                alignItems="center"
+                justify="flex-start">
+                <Grid item style={{ marginRight: '8px' }}>
+                  <PersonAddIcon />
+                </Grid>
+                <Grid item>New Discussions</Grid>
+              </Grid>
+            </Link>
+          </Grid>
         </Grid>
+
+        <ListingDataOf discussions={GroupData.discussions} />
+        {
+          //Discussion Modal
+        }
+        <Dialog
+          onClose={ModalHandleClickClose}
+          open={open}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogContent>
+            <DiscussionsNewForm
+              group={GroupData}
+              CloseModal={ModalHandleClickClose}
+            />
+          </DialogContent>
+        </Dialog>
       </TabPanel>
     </>
   );

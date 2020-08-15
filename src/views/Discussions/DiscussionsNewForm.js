@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, Box, Grid } from '@material-ui/core';
+import { Box, Grid, Checkbox, FormControlLabel } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { useForm } from 'react-hook-form';
 import { snackbarErrorHandler } from '../../utils/snackbar';
@@ -12,8 +12,7 @@ import { yupResolver } from '@hookform/resolvers';
 import { handleErrorToastr, handleSuccessToastr } from '../../utils/toastr';
 import { Api } from '../../config/constants';
 import axios from 'axios';
-import QuestionType from './QuestionType';
-import PollChoices from './PollChoices';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -37,42 +36,57 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const schema = yup.object().shape({
+  question: yup.string().required(' Question field  is required'),
+  description: yup.string().required(' Question field  is required'),
   question: yup.string().required(' Question field  is required')
 });
 
-const PollNewForm = props => {
+const DiscussionsNewForm = props => {
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
   const [choices, setChoices] = useState([]);
   const [qType, setQType] = useState([]);
+
+  // discussion : {
+  //   "creator_id" : "",
+  //   "group_id" : "",
+  //   "name" : "discussion 1",
+  //   "desc" : "description",
+  //   "img": "",
+  //   "visible_to_group":true,
+  //   "users_see_replies" : true,
+  //   "replies" : [id]    }
+
+  const [state, setState] = React.useState({
+    checkedA: false,
+    checkedB: false
+  });
+
   const { register, handleSubmit, errors, getValues } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const handeQuestiontype = QType => {
-    setQType(QType);
-  };
-
-  const handleChoices = choices => {
-    setChoices(choices);
+  const handleChange = event => {
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   const submitData = async () => {
     setDisabled(true);
 
-    const values = getValues('question');
+    const values = getValues();
     const dataTosubmit = {
+      creator_id: null,
       group_id: props.group._id,
-      type: qType,
-      question: values,
-      answers: [],
-      answerers_id: [],
-      choices: choices,
-      state: 'unhidden'
+      name: values.name,
+      desc: values.description,
+      img: null,
+      visible_to_group: state.checkedA,
+      users_see_replies: state.checkedB,
+      replies: 'unhidden'
     };
 
     try {
-      await axios.post(`${Api.baseURL}/addPoll`, dataTosubmit);
+      await axios.post(`${Api.baseURL}/addDiscussion`, dataTosubmit);
     } catch (error) {
       if (error.message == 'Network Error') {
         handleErrorToastr(error.message, () => props.CloseModal());
@@ -88,27 +102,84 @@ const PollNewForm = props => {
   return (
     <div>
       <Typography component="h1" variant="h5">
-        NEW POLL
+        NEW Discussion
       </Typography>
       <form
         className={classes.form}
         onSubmit={handleSubmit(submitData)}
         noValidate>
-        <QuestionType questionType={handeQuestiontype} />
-
         <TextField
           variant="outlined"
           margin="normal"
           inputRef={register()}
           required
           fullWidth
-          label="Question"
+          label="Name"
+          name="name"
+          autoFocus
+        />
+        {snackbarErrorHandler(errors.name)}
+        <TextField
+          multiline
+          rows={8}
+          variant="outlined"
+          margin="normal"
+          inputRef={register()}
+          required
+          fullWidth
+          label="Description"
+          name="description"
+          autoFocus
+        />
+        {snackbarErrorHandler(errors.description)}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          inputRef={register()}
+          required
+          fullWidth
+          label="Upload image"
           name="question"
           autoFocus
         />
-        {snackbarErrorHandler(errors.question)}
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="contained-button-file"
+          multiple
+          type="file"
+        />
+        {/* {snackbarErrorHandler(errors.question)} */}
 
-        <PollChoices pollChoices={handleChoices} />
+        <Grid>
+          <Grid item>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.checkedA}
+                  onChange={handleChange}
+                  name="checkedA"
+                  color="primary"
+                />
+              }
+              label="Discussion visible to group"
+            />
+          </Grid>
+          <Grid item>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.checkedB}
+                  onChange={handleChange}
+                  name="checkedB"
+                  color="primary"
+                />
+              }
+              label="Users can see replies"
+            />
+          </Grid>
+        </Grid>
+
         <Grid spacing={2}>
           <Box display="flex" justifyContent="center" m={1} p={1}>
             <Box>
@@ -118,7 +189,7 @@ const PollNewForm = props => {
                 color="primary"
                 type="submit"
                 disabled={disabled}>
-                <Typography variant="subtitle2">New Poll</Typography>
+                <Typography variant="subtitle2">New Discussion</Typography>
               </Button>
             </Box>
             <Box p={1}>
@@ -137,4 +208,4 @@ const PollNewForm = props => {
   );
 };
 
-export default PollNewForm;
+export default DiscussionsNewForm;

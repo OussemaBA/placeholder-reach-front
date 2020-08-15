@@ -20,13 +20,13 @@ const ListingDataOf = ({ polls, discussions }) => {
         ? discussions.map(disc => (
             <div className={classes.element}>
               <Divider />
-              <Discussion disc={disc} />
+              <Discussion discID={disc} />
             </div>
           ))
         : polls.map(poll => (
             <div className={classes.element}>
               <Divider />
-              <Poll poll={poll} />
+              <Poll pollID={poll} />
             </div>
           ))}
     </Grid>
