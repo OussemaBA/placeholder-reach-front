@@ -8,6 +8,7 @@ import Dialog from '@material-ui/core/Dialog';
 import CSVExport from '../../../../utils/CSVExport/CSVExport';
 import Slide from '@material-ui/core/Slide';
 import GroupsCreateNewForm from '../GroupNewForm';
+import CSVImport from '../../../../utils/CSVImport/CSVImport';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -62,7 +63,8 @@ const GroupsToolbar = props => {
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Button className={classes.importButton}>Import</Button>
+        <CSVImport />
+
         <Button className={classes.exportButton}>
           <CSVExport
             data={props.data}
