@@ -1,0 +1,90 @@
+{
+  "name": "react-material-dashboard",
+  "author": "DeviasIO",
+  "email": "contact@devias.io",
+  "licence": "MIT",
+  "version": "0.3.0",
+  "private": false,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "Groupion": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@date-io/date-fns": "1.x",
+    "@hookform/resolvers": "^0.1.0",
+    "@material-ui/core": "4.11.0",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/pickers": "^3.2.10",
+    "@material-ui/styles": "^4.10.0",
+    "axios": "^0.19.2",
+    "chart.js": "^2.8.0",
+    "clsx": "^1.0.4",
+    "date-fns": "^2.15.0",
+    "dotenv": "^8.2.0",
+    "fontsource-roboto": "^3.0.3",
+    "history": "^4.9.0",
+    "http-proxy-middleware": "^1.0.5",
+    "i18next": "^19.6.2",
+    "jss": "^10.3.0",
+    "jss-rtl": "^0.3.0",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "randomatic": "^3.1.1",
+    "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
+    "react-csv": "^2.0.3",
+    "react-csv-reader": "^3.1.0",
+    "react-dom": "^16.8.6",
+    "react-file-reader": "^1.1.4",
+    "react-hook-form": "^6.1.0",
+    "react-i18next": "^11.7.0",
+    "react-papaparse": "^3.7.1",
+    "react-perfect-scrollbar": "^1.5.3",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.4.1",
+    "react-toast-notifications": "^2.4.0",
+    "react-toastify": "^6.0.8",
+    "react-window": "^1.8.5",
+    "read-more-react": "^1.0.10",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-form": "^8.3.6",
+    "redux-thunk": "^2.3.0",
+    "toastr": "^2.1.4",
+    "underscore": "^1.9.1",
+    "universal-cookie": "^4.0.3",
+    "uuid": "^3.3.2",
+    "validate.js": "^0.13.1",
+    "yup": "^0.29.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.10.4",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.17.1",
+    "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1",
+    "typescript": "^3.5.1"
+  }
+}
