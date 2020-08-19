@@ -128,17 +128,6 @@ const ModeratorsTable = props => {
             <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedUsers.length === users.length}
-                      color="primary"
-                      indeterminate={
-                        selectedUsers.length > 0 &&
-                        selectedUsers.length < users.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
                   <TableCell className={classes.TableCell}>username</TableCell>
                   <TableCell className={classes.TableCell}>Email</TableCell>
                   <TableCell className={classes.TableCell}>groupes</TableCell>
@@ -151,51 +140,45 @@ const ModeratorsTable = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
-                  <TableRow
-                    className={classes.tableRow}
-                    hover
-                    key={user._id}
-                    selected={selectedUsers.indexOf(user._id) !== -1}>
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={selectedUsers.indexOf(user._id) !== -1}
-                        color="primary"
-                        onChange={event => handleSelectOne(event, user._id)}
-                        value="true"
-                      />
-                    </TableCell>
+                {users
+                  .reverse()
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(user => (
+                    <TableRow
+                      className={classes.tableRow}
+                      hover
+                      key={user._id}
+                      selected={selectedUsers.indexOf(user._id) !== -1}>
+                      <TableCell>
+                        <Typography>{user.username}</Typography>
+                      </TableCell>
+                      <TableCell>{user.email}</TableCell>
 
-                    <TableCell>
-                      <Typography>{user.username}</Typography>
-                    </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                      <TableCell>{user.groupes}</TableCell>
+                      <TableCell>{user.contact}</TableCell>
 
-                    <TableCell>{user.groupes}</TableCell>
-                    <TableCell>{user.contact}</TableCell>
+                      <TableCell>{user.password}</TableCell>
 
-                    <TableCell>{user.password}</TableCell>
-
-                    <TableCell>
-                      {moment(user.created_at).format('DD/MM/YYYY')}
-                    </TableCell>
-                    <TableCell>
-                      <Box display="flex">
-                        <IconButton>
-                          <EditOutlinedIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton onClick={() => handleDelete(user._id)}>
-                          <HighlightOffIcon
-                            fontSize="small"
-                            style={{
-                              color: red[500]
-                            }}
-                          />
-                        </IconButton>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      <TableCell>
+                        {moment(user.created_at).format('DD/MM/YYYY')}
+                      </TableCell>
+                      <TableCell>
+                        <Box display="flex">
+                          <IconButton>
+                            <EditOutlinedIcon fontSize="small" />
+                          </IconButton>
+                          <IconButton onClick={() => handleDelete(user._id)}>
+                            <HighlightOffIcon
+                              fontSize="small"
+                              style={{
+                                color: red[500]
+                              }}
+                            />
+                          </IconButton>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </div>

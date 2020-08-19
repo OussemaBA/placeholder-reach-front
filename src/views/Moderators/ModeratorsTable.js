@@ -50,7 +50,7 @@ const ModeratorsTable = props => {
   };
   return (
     <div className={classes.root}>
-      <ModeratorsToolbar whatToAdd={'Add Moderators'} data={moderatorsList} />
+      <ModeratorsToolbar whatToAdd={'Add Moderator'} data={moderatorsList} />
       <SearchBar
         fields={fields}
         data={moderators.moderators}
