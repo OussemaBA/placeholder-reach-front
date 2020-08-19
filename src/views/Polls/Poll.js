@@ -20,7 +20,6 @@ export default function Poll(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [data, setData] = React.useState({});
-  const [open, setOpen] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   content: {
     marginTop: theme.spacing(4)
   },
+  GroupsToolbar: {
+    marginBottom: theme.spacing(2)
+  },
   pagination: {
     marginTop: theme.spacing(3),
     display: 'flex',
@@ -70,12 +73,14 @@ const GroupList = props => {
   return (
     <div className={classes.root}>
       <GroupsToolbar data={GroupsList} />
-      <SearchBar
-        whatTosearchFor={''}
-        fields={fields}
-        data={groups.groups}
-        onSearchForData={handleSearchData}
-      />
+      <div className={classes.GroupsToolbar}>
+        <SearchBar
+          whatTosearchFor={'Searching...'}
+          fields={fields}
+          data={groups.groups}
+          onSearchForData={handleSearchData}
+        />
+      </div>
       {renderGroupsCards()}
       <div className={classes.pagination}>
         <Typography variant="caption">1-6 of 20</Typography>
