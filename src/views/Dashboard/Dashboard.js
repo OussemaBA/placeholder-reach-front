@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item lg={3} sm={6} xl={3} xs={12}>
           <TotalModerators />
         </Grid>

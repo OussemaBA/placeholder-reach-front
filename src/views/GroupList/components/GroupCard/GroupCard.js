@@ -36,25 +36,9 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: '5px 5px 5px #131417',
     margin: '2%',
     width: 300,
     height: 125
-  },
-  imageContainer: {
-    height: 64,
-    width: 64,
-
-    margin: '0 auto',
-    border: `1px solid ${theme.palette.divider}`,
-    borderRadius: '5px',
-    overflow: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  image: {
-    width: '100%'
   },
   statsItem: {
     display: 'flex',
@@ -64,6 +48,11 @@ const useStyles = makeStyles(theme => ({
   statsIcon: {
     color: theme.palette.icon,
     marginRight: theme.spacing(1)
+  },
+  typographyItem: {
+    //   marginLeft: theme.spacing(1),
+    //   marginRight: theme.spacing(1)
+    color: '#c49d7c'
   }
 }));
 
@@ -87,63 +76,94 @@ const GroupCard = props => {
   return (
     <Card {...rest} className={classes.root}>
       <CardContent>
-        <Typography align="center" gutterBottom variant="h6">
-          {Group.name}
-        </Typography>
-        <Typography align="center" variant="body1">
-          {Group.desc.slice(0, 30) + '...'}
-        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Typography gutterBottom variant="h6">
+                  {Group.name}
+                </Typography>
+                <Typography variant="body1">
+                  {Group.desc.slice(0, 20) + '...'}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Typography variant="body2" className={classes.typographyItem}>
+                Participants: {Group.participants.length}
+              </Typography>
+              <Typography variant="body2" className={classes.typographyItem}>
+                Moderators: {Group.moderators.length}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
       </CardContent>
       <Divider />
       <CardActions>
         {
           //theme Provider for customization
         }
-        <ThemeProvider theme={theme}>
-          <Grid container justify="space-between">
-            <Grid className={classes.statsItem} item>
-              <Button
-                size="small"
+        <Grid container justify="space-between">
+          <Grid className={classes.statsItem} item>
+            <Button size="small">
+              <Typography
                 color="primary"
+                variant="h6"
                 onClick={ModelHandleClickOpen}>
-                <Typography variant="subtitle2">View</Typography>
-              </Button>
-              <Dialog
-                fullScreen
-                onClose={ModelHandleClickClose}
-                open={open}
-                scroll={'paper'}>
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                  <Typography align="center" variant="h6" gutterBottom>
-                    {Group?.name}
-                  </Typography>
-                </DialogTitle>
-
-                <ViewOptionTabs GroupData={Group} />
-                <DialogActions>
-                  <Button autoFocus onClick={handleClose} color="primary">
-                    Close
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </Grid>
-            <Grid className={classes.statsItem} item>
-              <RouterLink to="/">
-                <Button size="small" color="primary">
-                  <Typography variant="subtitle2">Edit</Typography>
-                </Button>
-              </RouterLink>
-            </Grid>
-            <Grid className={classes.statsItem} item>
-              <RouterLink to="/">
-                <Button size="small" color="primary">
-                  <Typography variant="subtitle2">Delete</Typography>
-                </Button>
-              </RouterLink>
-            </Grid>
+                View
+              </Typography>
+            </Button>
           </Grid>
-        </ThemeProvider>
+          <Grid className={classes.statsItem} item>
+            <RouterLink to="/">
+              <Button size="small">
+                <Typography color="primary" variant="h6">
+                  Edit
+                </Typography>
+              </Button>
+            </RouterLink>
+          </Grid>
+          <Grid className={classes.statsItem} item>
+            <RouterLink to="/">
+              <Button size="small">
+                <Typography color="primary" variant="h6">
+                  Delete
+                </Typography>
+              </Button>
+            </RouterLink>
+          </Grid>
+        </Grid>
       </CardActions>
+      {
+        //View Dialog
+      }
+      <Dialog
+        fullScreen
+        onClose={ModelHandleClickClose}
+        open={open}
+        scroll={'paper'}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <Typography align="center" variant="h6" gutterBottom>
+            {Group?.name}
+          </Typography>
+        </DialogTitle>
+
+        <ViewOptionTabs GroupData={Group} />
+        <DialogActions>
+          <Button size="small">
+            <Typography
+              color="primary"
+              variant="h6"
+              onClick={ModelHandleClickClose}>
+              Close
+            </Typography>
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {
+        // END View Dialog
+      }
     </Card>
   );
 };

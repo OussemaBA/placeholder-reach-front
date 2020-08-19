@@ -36,12 +36,10 @@ const useStyles = makeStyles(theme => ({
   content: {
     padding: 0
   },
-
   nameContainer: {
     display: 'flex',
     alignItems: 'center'
   },
-
   actions: {
     justifyContent: 'flex-end'
   },

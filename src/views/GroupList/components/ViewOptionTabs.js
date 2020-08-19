@@ -146,7 +146,6 @@ const ViewOptionTabs = props => {
           </Grid>
         </Grid>
         <ReviewingModeratorsList data={GroupData.moderators} />
-
         {
           //Moderator Modal
         }
